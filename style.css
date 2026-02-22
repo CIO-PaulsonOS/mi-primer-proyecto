@@ -89,6 +89,48 @@ h1 {
   background: #f9f9f9;
   border-radius: 5px;
   margin-bottom: 8px;
+  /* Animación de entrada: desliza hacia abajo y aparece */
+  animation: entrada 0.3s ease-out;
+}
+
+/* ===== ANIMACIONES ===== */
+
+/* Entrada: la tarea aparece desde arriba */
+@keyframes entrada {
+  from {
+    opacity: 0;              /* Invisible */
+    transform: translateY(-10px);  /* 10px más arriba */
+  }
+  to {
+    opacity: 1;              /* Visible */
+    transform: translateY(0);      /* Posición final */
+  }
+}
+
+/* Salida: la tarea se encoge y desvanece */
+@keyframes salida {
+  from {
+    opacity: 1;
+    transform: scale(1);     /* Tamaño normal */
+    max-height: 60px;        /* Altura normal de una tarea */
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);  /* Se encoge un poco */
+    max-height: 0;           /* Colapsa la altura */
+    padding: 0 12px;         /* Colapsa el padding vertical */
+    margin-bottom: 0;
+  }
+}
+
+/* Clase que activa la animación de salida */
+.tarea.saliendo {
+  animation: salida 0.3s ease-in forwards;
+  overflow: hidden;  /* Evita que el contenido se desborde al colapsar */
+  /*
+    "forwards" mantiene el estado final de la animación
+    (sin esto, la tarea volvería a aparecer al terminar)
+  */
 }
 
 .tarea:hover {

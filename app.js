@@ -27,6 +27,10 @@ function actualizarMensajeVacio() {
   }
 }
 
+// Controla si se deben animar las tareas al renderizar
+// false al inicio para que las tareas guardadas no se animen
+let animarEntrada = false;
+
 // Dibuja TODAS las tareas en la pantalla
 function renderizarTareas() {
   // Vaciamos la lista antes de redibujar
@@ -37,6 +41,11 @@ function renderizarTareas() {
     // Creamos un elemento <li> para cada tarea
     const li = document.createElement("li");
     li.className = "tarea";
+
+    // Solo animamos si no es la carga inicial
+    if (!animarEntrada) {
+      li.style.animation = "none";
+    }
     if (tarea.completada) {
       li.classList.add("completada");
     }
@@ -90,11 +99,21 @@ function toggleCompletada(indice) {
   renderizarTareas();
 }
 
-// Elimina una tarea del array
+// Elimina una tarea con animación de salida
 function borrarTarea(indice) {
-  tareas.splice(indice, 1); // splice elimina 1 elemento en la posición "indice"
-  guardarTareas();
-  renderizarTareas();
+  // Buscamos el elemento <li> correspondiente en la lista
+  const elementos = listaTareas.children;
+  const li = elementos[indice];
+
+  // Añadimos la clase que activa la animación de salida
+  li.classList.add("saliendo");
+
+  // Esperamos a que la animación termine (300ms) antes de borrar
+  li.addEventListener("animationend", function () {
+    tareas.splice(indice, 1); // Ahora sí eliminamos del array
+    guardarTareas();
+    renderizarTareas();
+  });
 }
 
 // ===== MODO OSCURO =====
@@ -140,4 +159,5 @@ formulario.addEventListener("submit", function (evento) {
 
 // ===== INICIO =====
 cargarTema();        // Aplicamos el tema guardado
-renderizarTareas();  // Dibujamos las tareas que ya existían
+renderizarTareas();  // Dibujamos las tareas que ya existían (sin animación)
+animarEntrada = true; // A partir de ahora, las nuevas tareas sí se animan
