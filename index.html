@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<!--
+  lang="es" indica que la página está en español.
+  Esto ayuda a los lectores de pantalla y a Google.
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <!-- charset="UTF-8" permite usar tildes, eñes y emojis -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- viewport hace que la página se vea bien en móviles -->
+
+  <title>Mi Lista de Tareas</title>
+
+  <!-- Conectamos el archivo de estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="contenedor">
+    <!-- Cabecera con título y botón de modo oscuro -->
+    <div class="cabecera">
+      <h1>Mi Lista de Tareas</h1>
+      <button id="btn-tema" aria-label="Cambiar tema">Luna</button>
+      <!-- aria-label ayuda a lectores de pantalla a entender el botón -->
+    </div>
+
+    <!-- Formulario para añadir tareas -->
+    <form id="formulario-tarea">
+      <input
+        type="text"
+        id="entrada-tarea"
+        placeholder="Escribe una tarea..."
+        required
+      >
+      <!--
+        required: el navegador no deja enviar el formulario vacío
+        placeholder: texto gris que desaparece al escribir
+      -->
+      <button type="submit">Añadir</button>
+    </form>
+
+    <!-- Aquí aparecerán las tareas (JavaScript las añadirá) -->
+    <ul id="lista-tareas"></ul>
+
+    <p id="mensaje-vacio">No hay tareas. Añade una arriba.</p>
+  </div>
+
+  <!-- Conectamos el archivo de lógica (al final para que el HTML ya exista) -->
+  <script src="app.js"></script>
+</body>
+
+</html>

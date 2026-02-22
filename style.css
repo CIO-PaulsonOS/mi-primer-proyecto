@@ -1,0 +1,195 @@
+/* ===== ESTILOS GENERALES ===== */
+/* Aplicamos un fondo y una fuente legible a toda la página */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;           /* Elimina el margen blanco por defecto del navegador */
+  padding: 20px;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+/* Centramos el contenido y le damos forma de "tarjeta" */
+.contenedor {
+  max-width: 500px;       /* No crece más de 500px */
+  margin: 40px auto;      /* auto centra horizontalmente */
+  background: white;
+  padding: 30px;
+  border-radius: 10px;    /* Esquinas redondeadas */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+}
+
+/* ===== CABECERA (título + botón tema) ===== */
+.cabecera {
+  display: flex;
+  justify-content: space-between; /* Título a la izquierda, botón a la derecha */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+h1 {
+  color: #333;
+  margin: 0;
+}
+
+#btn-tema {
+  background: none;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ===== FORMULARIO ===== */
+/* Ponemos el input y el botón en fila usando flexbox */
+#formulario-tarea {
+  display: flex;           /* Coloca hijos en fila */
+  gap: 10px;               /* Espacio entre input y botón */
+  margin-bottom: 20px;
+}
+
+#entrada-tarea {
+  flex: 1;                 /* El input ocupa todo el espacio disponible */
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#entrada-tarea:focus {
+  border-color: #4a90d9;  /* Borde azul al hacer clic */
+  outline: none;           /* Quita el borde naranja por defecto */
+}
+
+#formulario-tarea button {
+  padding: 10px 20px;
+  background-color: #4a90d9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;         /* La mano al pasar el ratón */
+}
+
+#formulario-tarea button:hover {
+  background-color: #357abd;  /* Más oscuro al pasar el ratón */
+}
+
+/* ===== LISTA DE TAREAS ===== */
+#lista-tareas {
+  list-style: none;        /* Quita los puntos de la lista */
+  padding: 0;
+}
+
+/* Cada tarea */
+.tarea {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.tarea:hover {
+  background: #f0f0f0;
+}
+
+/* Checkbox para completar */
+.tarea input[type="checkbox"] {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Texto de la tarea */
+.tarea span {
+  flex: 1;                 /* Ocupa el espacio entre checkbox y botón */
+  font-size: 16px;
+}
+
+/* Tarea completada: texto tachado y gris */
+.tarea.completada span {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* Botón de borrar */
+.tarea .btn-borrar {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.tarea .btn-borrar:hover {
+  color: #c0392b;
+}
+
+/* ===== MENSAJE CUANDO NO HAY TAREAS ===== */
+#mensaje-vacio {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+#mensaje-vacio.oculto {
+  display: none;           /* Se oculta cuando hay tareas */
+}
+
+/* ===== MODO OSCURO ===== */
+/*
+  Usamos la clase "oscuro" en el <body>.
+  Cuando body tiene esa clase, estos estilos se activan
+  y sobreescriben los colores claros de arriba.
+*/
+body.oscuro {
+  background-color: #1a1a2e;
+}
+
+body.oscuro .contenedor {
+  background: #16213e;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.oscuro h1 {
+  color: #e0e0e0;
+}
+
+body.oscuro #btn-tema {
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.oscuro #entrada-tarea {
+  background: #0f3460;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.oscuro #entrada-tarea::placeholder {
+  color: #888;
+}
+
+body.oscuro .tarea {
+  background: #0f3460;
+}
+
+body.oscuro .tarea:hover {
+  background: #1a4a7a;
+}
+
+body.oscuro .tarea span {
+  color: #e0e0e0;
+}
+
+body.oscuro .tarea.completada span {
+  color: #666;
+}
+
+body.oscuro #mensaje-vacio {
+  color: #666;
+}
