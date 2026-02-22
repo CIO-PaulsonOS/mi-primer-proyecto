@@ -149,6 +149,25 @@ h1 {
 .tarea span {
   flex: 1;                 /* Ocupa el espacio entre checkbox y botón */
   font-size: 16px;
+  cursor: pointer;         /* Indica que se puede hacer clic (doble clic para editar) */
+}
+
+/* ===== MODO EDICIÓN ===== */
+/* Input que reemplaza al texto cuando se edita una tarea */
+.tarea .input-editar {
+  flex: 1;
+  font-size: 16px;
+  padding: 4px 8px;
+  border: 2px solid #4a90d9;
+  border-radius: 4px;
+  outline: none;
+  font-family: inherit;    /* Misma fuente que el resto de la app */
+}
+
+body.oscuro .tarea .input-editar {
+  background: #1a1a2e;
+  color: #e0e0e0;
+  border-color: #4a90d9;
 }
 
 /* Tarea completada: texto tachado y gris */

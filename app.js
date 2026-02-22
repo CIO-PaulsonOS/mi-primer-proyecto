@@ -58,9 +58,12 @@ function renderizarTareas() {
       toggleCompletada(indice);
     });
 
-    // Texto de la tarea
+    // Texto de la tarea (doble clic para editar)
     const texto = document.createElement("span");
     texto.textContent = tarea.texto;
+    texto.addEventListener("dblclick", function () {
+      editarTarea(indice, li, texto);
+    });
 
     // Botón para borrar
     const btnBorrar = document.createElement("button");
@@ -97,6 +100,49 @@ function toggleCompletada(indice) {
   tareas[indice].completada = !tareas[indice].completada;
   guardarTareas();
   renderizarTareas();
+}
+
+// Convierte el texto de una tarea en un campo editable
+function editarTarea(indice, li, spanTexto) {
+  // Creamos un input con el texto actual
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "input-editar";
+  input.value = tareas[indice].texto;
+
+  // Reemplazamos el <span> por el <input>
+  li.replaceChild(input, spanTexto);
+
+  // Ponemos el cursor dentro del input automáticamente
+  input.focus();
+  // Seleccionamos todo el texto para que sea fácil reescribirlo
+  input.select();
+
+  // Función que guarda el cambio
+  function guardarEdicion() {
+    const nuevoTexto = input.value.trim();
+    if (nuevoTexto !== "") {
+      // Si hay texto, actualizamos la tarea
+      tareas[indice].texto = nuevoTexto;
+    }
+    // Si está vacío, dejamos el texto original (no borramos)
+    guardarTareas();
+    renderizarTareas();
+  }
+
+  // Guardar al pulsar Enter
+  input.addEventListener("keydown", function (evento) {
+    if (evento.key === "Enter") {
+      guardarEdicion();
+    }
+    // Cancelar con Escape: restaura el texto original
+    if (evento.key === "Escape") {
+      renderizarTareas();
+    }
+  });
+
+  // Guardar al hacer clic fuera del input (perder el foco)
+  input.addEventListener("blur", guardarEdicion);
 }
 
 // Elimina una tarea con animación de salida
